@@ -1,4 +1,5 @@
 name: JBS
+description: JBS Season 6
 version: '${project.version}'
 main: pegasus.jbs.JBS
 api-version: '1.20'
