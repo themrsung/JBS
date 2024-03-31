@@ -1,12 +1,10 @@
 package pegasus.jbs.listener;
 
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import pegasus.jbs.JBS;
 import pegasus.jbs.economy.ServerActor;
 import pegasus.jbs.event.CashTransferEvent;
-import pegasus.jbs.event.CashTransferFailedEvent;
 
 /**
  * Listener for {@link CashTransferEvent}.
@@ -22,8 +20,7 @@ public class CashTransferListener extends JBSListener {
 
         // Balance check (ignore if sender is server)
         if (event.sender.getCash() < event.payment && !(event.sender instanceof ServerActor)) {
-            // Payment failed event
-            Bukkit.getPluginManager().callEvent(new CashTransferFailedEvent(event));
+            // Payment failed
             return;
         }
 

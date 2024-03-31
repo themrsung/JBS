@@ -1,5 +1,7 @@
 package pegasus.jbs.economy;
 
+import pegasus.jbs.JBS;
+
 import java.util.UUID;
 
 /**
@@ -61,6 +63,24 @@ public class ServerActor implements EconomyActor {
     @Override
     public void setCash(double cash) {
         this.cash = cash;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Override
+    public long getCreditScore() {
+        return JBS.maximumCreditScore;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @param creditScore The credit score of this actor
+     */
+    @Override
+    public void setCreditScore(long creditScore) {
+        // Do nothing
     }
 
     /**

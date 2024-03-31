@@ -1,6 +1,7 @@
 package pegasus.jbs.economy;
 
 import org.bukkit.entity.Player;
+import pegasus.jbs.JBS;
 
 import java.util.UUID;
 
@@ -11,15 +12,17 @@ public class PlayerActor implements EconomyActor {
     protected final UUID uniqueId;
     protected String name;
     protected double cash;
+    protected long creditScore;
 
     /**
      * Creates a new player actor.
      *
-     * @param uniqueId The unique identifier of this actor
-     * @param name     The name of this actor
-     * @param cash     The cash balance of this actor
+     * @param uniqueId    The unique identifier of this actor
+     * @param name        The name of this actor
+     * @param cash        The cash balance of this actor
+     * @param creditScore The credit score
      */
-    public PlayerActor(UUID uniqueId, String name, double cash) {
+    public PlayerActor(UUID uniqueId, String name, double cash, long creditScore) {
         this.uniqueId = uniqueId;
         this.name = name;
         this.cash = cash;
@@ -30,9 +33,10 @@ public class PlayerActor implements EconomyActor {
      *
      * @param player The player to represent
      * @param cash   The cash balance
+     * @param creditScore The credit score
      */
-    public PlayerActor(Player player, double cash) {
-        this(player.getUniqueId(), player.getName(), cash);
+    public PlayerActor(Player player, double cash, long creditScore) {
+        this(player.getUniqueId(), player.getName(), cash, creditScore);
     }
 
     /**
@@ -85,6 +89,24 @@ public class PlayerActor implements EconomyActor {
     }
 
     /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Override
+    public long getCreditScore() {
+        return creditScore;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @param creditScore The credit score of this actor
+     */
+    @Override
+    public void setCreditScore(long creditScore) {
+        this.creditScore = creditScore;
+    }
+
+    /**
      * Returns the string representation of this player.
      *
      * @return The string representation of this player
@@ -95,6 +117,7 @@ public class PlayerActor implements EconomyActor {
                 "uniqueId=" + uniqueId +
                 ", name='" + name + '\'' +
                 ", cash=" + cash +
+                ", creditScore=" + creditScore +
                 '}';
     }
 }

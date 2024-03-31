@@ -69,6 +69,79 @@ public final class Economy implements JBSComponent {
     }
 
     //
+    // Logic
+    //
+
+    private static final long creditScoreRange = JBS.maximumCreditScore - JBS.minimumCreditScore;
+
+    private static final long creditScore90 = Math.round((double) creditScoreRange * 0.9);
+    private static final long creditScore80 = Math.round((double) creditScoreRange * 0.8);
+    private static final long creditScore60 = Math.round((double) creditScoreRange * 0.6);
+    private static final long creditScore40 = Math.round((double) creditScoreRange * 0.4);
+    private static final long creditScore20 = Math.round((double) creditScoreRange * 0.2);
+
+    /**
+     * Clamps the credit score of the provided actor.
+     * @param actor The actor
+     */
+    public static void clampCreditScore(EconomyActor actor) {
+        var score = actor.getCreditScore();
+        var min = JBS.minimumCreditScore;
+        var max = JBS.maximumCreditScore;
+
+        if (score > max) actor.setCreditScore(max);
+        if (score < min) actor.setCreditScore(min);
+    }
+
+    /**
+     * Increments the credit score of the provided actor.
+     * @param actor The actor
+     */
+    public static void incrementCreditScore(EconomyActor actor) {
+        var score = actor.getCreditScore();
+
+        if (score >= creditScore90) {
+            actor.setCreditScore(score + 1);
+        } else if (score >= creditScore80) {
+            actor.setCreditScore(score + 3);
+        } else if (score >= creditScore60) {
+            actor.setCreditScore(score + 4);
+        } else if (score >= creditScore40) {
+            actor.setCreditScore(score + 3);
+        } else if (score >= creditScore20) {
+            actor.setCreditScore(score + 2);
+        } else {
+            actor.setCreditScore(score + 1);
+        }
+
+        clampCreditScore(actor);
+    }
+
+    /**
+     * Decrements the credit score of the provided actor.
+     * @param actor The actor
+     */
+    public static void decrementCreditScore(EconomyActor actor) {
+        var score = actor.getCreditScore();
+
+        if (score >= creditScore90) {
+            actor.setCreditScore(score - 1);
+        } else if (score >= creditScore80) {
+            actor.setCreditScore(score - 2);
+        } else if (score >= creditScore60) {
+            actor.setCreditScore(score - 4);
+        } else if (score >= creditScore40) {
+            actor.setCreditScore(score - 8);
+        } else if (score >= creditScore20) {
+            actor.setCreditScore(score - 10);
+        } else {
+            actor.setCreditScore(score - 50);
+        }
+
+        clampCreditScore(actor);
+    }
+
+    //
     // IO
     //
 

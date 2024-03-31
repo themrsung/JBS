@@ -16,6 +16,16 @@ public final class JBS extends JavaPlugin {
      */
     public static final String savePath = "plugins/jbs";
 
+    /**
+     * The minimum credit score.
+     */
+    public static final long minimumCreditScore = 0;
+
+    /**
+     * The maximum credit score.
+     */
+    public static final long maximumCreditScore = 1000;
+
     //
     // Components
     //

@@ -41,4 +41,20 @@ public interface EconomyActor {
      * @param cash The cash balance of this actor
      */
     void setCash(double cash);
+
+    //
+    // Credit Score
+    //
+
+    /**
+     * Returns the credit score of this actor.
+     * @return The credit score of this actor
+     */
+    long getCreditScore();
+
+    /**
+     * Sets the credit score of this actor.
+     * @param creditScore The credit score of this actor
+     */
+    void setCreditScore(long creditScore);
 }
