@@ -3,6 +3,7 @@ package pegasus.jbs.listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import pegasus.jbs.JBS;
+import pegasus.jbs.economy.Economy;
 import pegasus.jbs.economy.ServerActor;
 import pegasus.jbs.event.CashTransferEvent;
 
@@ -21,6 +22,7 @@ public class CashTransferListener extends JBSListener {
         // Balance check (ignore if sender is server)
         if (event.sender.getCash() < event.payment && !(event.sender instanceof ServerActor)) {
             // Payment failed
+            Economy.decrementCreditScore(event.sender);
             return;
         }
 
